@@ -40,6 +40,8 @@ public class UserController {
             return Result.error(1,"姓名为空");
         else if(userEmail.length() == 0)
             return Result.error(2,"email为空");
+        else if (!userEmail.matches("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"))
+            return Result.error(2,"email错误");
         else if((userPassword.length()!=0 || userPassword2.length() !=0) && !userPassword.equals(userPassword2))
             return Result.error(3,"密码不同");
         return userService.modifyInfo(userName, userEmail, userPassword,httpServletRequest);
