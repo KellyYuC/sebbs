@@ -43,4 +43,22 @@ public class UserService {
             model.addAttribute("user", null);
         }
     }
+   
+     public void courseManagement(Model model, HttpServletRequest httpServletRequest){
+        User user = (User) httpServletRequest.getSession().getAttribute("user");
+        if(user.getType() != null && user.getType().equals("teacher")){
+
+        }
+
+        List<Course> courseList = courseRepository.findAllByTeacherIs(user);
+        for (Course c:courseList){
+            Integer num = studentCourseRepository.countByCourse(c);
+            c.setStuNumber(num);
+            courseRepository.save(c);
+        }
+
+        model.addAttribute("courseList",courseList);
+
+    }
+
 }
