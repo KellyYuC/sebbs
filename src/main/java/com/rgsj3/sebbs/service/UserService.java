@@ -44,11 +44,8 @@ public class UserService {
         }
     }
    
-     public void courseManagement(Model model, HttpServletRequest httpServletRequest){
+   public void courseManagement(Model model, HttpServletRequest httpServletRequest){
         User user = (User) httpServletRequest.getSession().getAttribute("user");
-        if(user.getType() != null && user.getType().equals("teacher")){
-
-        }
 
         List<Course> courseList = courseRepository.findAllByTeacherIs(user);
         for (Course c:courseList){
